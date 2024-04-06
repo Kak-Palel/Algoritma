@@ -1,4 +1,4 @@
-def nrs(f, x1, x2, ate = 1e-4):
+def secant(f, x1, x2, ate = 1e-4):
   while abs(x2-x1)>ate:
     temp = x2
     x2 = (x1*f(x2) - x2*f(x1))/(f(x2)-f(x1))
