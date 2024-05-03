@@ -20,9 +20,3 @@ def cramer(m, ans):
 def inverse_solver(m, ans):
   inv = im.inverse_matrix(m)
   return bo.multiply_matrix(inv, ans)
-  
-# m = np.array([[1, 2, 1], [3, 6, 0], [2, 8, 4]])
-# ans = np.array([2, 9, 6])
-# print(cramer(m, ans))
-# print(inverse_solver(m, ans))
-
