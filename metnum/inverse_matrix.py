@@ -1,55 +1,30 @@
-import numpy as np
+def inverse_matrix(matrix):
+    n = len(matrix)
+    identity = [[float(i == j) for i in range(n)] for j in range(n)]
+    for i in range(n):
+        if matrix[i][i] == 0.0:
+            for j in range(i+1, n):
+                if matrix[j][i] != 0.0:
+                    matrix[i], matrix[j] = matrix[j], matrix[i]
+                    identity[i], identity[j] = identity[j], identity[i]
+                    break
+            else:
+                return None
+        pivot = matrix[i][i]
+        for j in range(i, n):
+            matrix[i][j] /= pivot
+        for j in range(n):
+            identity[i][j] /= pivot
+        for j in range(n):
+            if i != j:
+                ratio = matrix[j][i]
+                for k in range(i, n):
+                    matrix[j][k] -= ratio * matrix[i][k]
+                for k in range(n):
+                    identity[j][k] -= ratio * identity[i][k]
+    print(identity)
+    print()
+    return identity
 
-def inverse_matrix(M, stage = 0, A = np.array([0])):
-  length = len(M)
-  M = M.astype('f')
-  if(stage == length):
-    return M
- 
-  if len(A) == 1:
-    A = np.zeros((length, length))
-    for a in range(length):
-      A[a][a] = 1
-
-  factor = 0
-  for i in range(stage, length):
-    if M[stage][i] != 0:
-      factor = M[i][stage]
-      temp = np.copy(M[i])
-      M[i] = M[stage]
-      M[stage] = temp
-      temp = np.copy(A[i])
-      A[i] = A[stage]
-      A[stage] = temp
-      break
-
-  if factor == 0:
-    raise Exception("The Matrix M has no inverse")
-
-  for i in range(stage, length):
-    M[stage][i] /= factor
-  for i in range (length):
-    A[stage][i] /= factor
-  
-  for i in range(stage + 1, length):
-    a = M[i][stage]
-    for j in range(stage, length):
-      M[i][j] -= a*M[stage][j]
-    for j in range(length):
-      A[i][j] -= a*A[stage][j]
-
-  M = inverse_matrix(M, stage + 1, A)
-
-  for i in range(0, stage):
-    a = M[i][stage]
-    M[i][stage] = 0
-    for j in range(length):
-      A[i][j] -= a*A[stage][j]
-
-  if stage == 0:
-    return A
-
-  return M
-
-# M = np.array([[1, 2, 3], [2, 5, 3], [1, 0, 8]])
+# M = list([[1, 2, 3], [2, 5, 3], [1, 0, 8]])
 # print(inverse_matrix(M))

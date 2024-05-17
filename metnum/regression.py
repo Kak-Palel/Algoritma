@@ -1,4 +1,4 @@
-import numpy as np
+import unittest
 import spl_solver as spl
 import math
 
@@ -10,7 +10,7 @@ def linear(x, y):
   sumXY = 0
   for i in range(len(x)):
     sumXY += x[i]*y[i]
-  return spl.cramer(np.array([[len(x), sumX], [sumX, sumXsquared]]), np.array([sumY, sumXY]))
+  return spl.cramer(list([[len(x), sumX], [sumX, sumXsquared]]), list([sumY, sumXY]))
 
 def Cx_power_b(x, y):
   lnx = list([math.log(i) for i in x])
@@ -41,8 +41,7 @@ def polynomial(x, y, order=2):
     matrix_y.append(sum(temp))
   return spl.cramer(matrix_x, matrix_y)
 
-def error(x, y, f):
+def error(x, y, f : callable):
   fx = [f(i) for i in x]
   err = [(fx[i]-y[i])**2 for i in range(6)]
   return math.sqrt(sum(err)/6)
-
