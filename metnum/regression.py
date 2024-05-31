@@ -1,4 +1,3 @@
-import unittest
 import spl_solver as spl
 import math
 
