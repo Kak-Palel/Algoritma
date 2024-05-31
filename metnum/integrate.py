@@ -36,14 +36,14 @@ def simpsons_rule(f, a, b, dx = 10e-5):
     return (dx / 3) * area
 
 # Example usage
-def f(x):
-    return x**2
+# def f(x):
+#     return x**2
 
-a = 0
-b = 1
-n = 100
+# a = 0
+# b = 1
+# n = 100
 
-print("Numerical integration square:", square(f, a, b))
-print("Numerical integration trapezoid:", trapezoid(f, a, b))
-print("Numerical integration middle point:", middlePoint(f, a, b))
-print("Numerical integration simpsons rule:", simpsons_rule(f, a, b, n))
+# print("Numerical integration square:", square(f, a, b))
+# print("Numerical integration trapezoid:", trapezoid(f, a, b))
+# print("Numerical integration middle point:", middlePoint(f, a, b))
+# print("Numerical integration simpsons rule:", simpsons_rule(f, a, b, n))

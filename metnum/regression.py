@@ -44,3 +44,17 @@ def error(x, y, f : callable):
   fx = [f(i) for i in x]
   err = [(fx[i]-y[i])**2 for i in range(6)]
   return math.sqrt(sum(err)/6)
+
+def interpolate(x , y, order = -1):
+  if order == -1:
+    order = len(x) - 1
+  if order == 1:
+    return linear(x, y)
+  else:
+    m = list([[x[j]**i for i in range(order+1)] for j in range(0, len(x))])
+    return spl.cramer(m, y)
+
+# x = [8, 9, 9.5]
+# y = [2.0794, 2.1972, 2.2513]
+
+# print(interpolate(x, y))
