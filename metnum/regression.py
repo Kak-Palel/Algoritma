@@ -65,9 +65,23 @@ def interpolate_lagrange(Xset : list, Yset : list, x):
         temp *= (x - Xset[j])/(Xset[i] - Xset[j])
     result += temp
   return result
-      
 
-x = [0, 1, 2]
-y = [1, 3, 2]
-print(interpolate_lagrange(x, y, 1.5))
-# print(interpolate(x, y))
+def interpolate_newton(Xset : list, Yset : list, x):
+  n = len(Xset)
+  #the a matrix
+  xans = Xset.copy()
+  a = Yset.copy()
+  for k in range(1, n):
+    for i in range(n - 1, k - 1, -1):
+      a[i] = (a[i] - a[i - 1])/(xans[i] - xans[i - k])
+
+  n -= 1
+  p = a[n]
+  for k in range(1, n + 1):
+    p = a[n - k] + (x - Xset[n - k])*p
+  return p
+
+# x = [0, 1, 2]
+# y = [1, 3, 2]
+# print(interpolate_newton(x, y, 1.5)) #2.875
+# print(interpolate_lagrange(x, y, 1.5))

@@ -86,9 +86,9 @@ def gauss_seidel(M, ans, tolerance = 10e-5):
     xback = copy.deepcopy(x)
   return x
 
-M = list([[3,  1, -1],
-          [1,  4,  2],
-          [2, -2,  5]])
-ans = list([12, 9, -3])
+# M = list([[3,  1, -1],
+#           [1,  4,  2],
+#           [2, -2,  5]])
+# ans = list([12, 9, -3])
 
-print(gauss_seidel(M, ans))
+# print(gauss_seidel(M, ans))
