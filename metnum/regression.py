@@ -54,7 +54,20 @@ def interpolate(x , y, order = -1):
     m = list([[x[j]**i for i in range(order+1)] for j in range(0, len(x))])
     return spl.cramer(m, y)
 
-# x = [8, 9, 9.5]
-# y = [2.0794, 2.1972, 2.2513]
+#only returns the output, not the function, because Im too lazy to implement binomial newton ^^
+def interpolate_lagrange(Xset : list, Yset : list, x):
+  n = len(Xset)
+  result = 0
+  for i in range(n):
+    temp = Yset[i]
+    for j in range(n):
+      if j != i:
+        temp *= (x - Xset[j])/(Xset[i] - Xset[j])
+    result += temp
+  return result
+      
 
+x = [0, 1, 2]
+y = [1, 3, 2]
+print(interpolate_lagrange(x, y, 1.5))
 # print(interpolate(x, y))

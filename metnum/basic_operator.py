@@ -1,5 +1,3 @@
-import inverse_matrix as im
-
 def add(A, B):
   for i in range(len(A)):
     for j in range(len(A[0])):
@@ -29,3 +27,29 @@ def multiply_matrix(a, b):
       for k in range(len(b)):
         result[i][j] += a[i][k] * b[k][j]
   return result
+
+def inverse_matrix(matrix):
+  n = len(matrix)
+  identity = [[float(i == j) for i in range(n)] for j in range(n)]
+  for i in range(n):
+    if matrix[i][i] == 0.0:
+      for j in range(i+1, n):
+        if matrix[j][i] != 0.0:
+          matrix[i], matrix[j] = matrix[j], matrix[i]
+          identity[i], identity[j] = identity[j], identity[i]
+          break
+      else:
+        return None
+    pivot = matrix[i][i]
+    for j in range(i, n):
+      matrix[i][j] /= pivot
+    for j in range(n):
+      identity[i][j] /= pivot
+    for j in range(n):
+      if i != j:
+        ratio = matrix[j][i]
+        for k in range(i, n):
+          matrix[j][k] -= ratio * matrix[i][k]
+        for k in range(n):
+          identity[j][k] -= ratio * identity[i][k]
+  return identity
