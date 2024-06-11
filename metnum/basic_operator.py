@@ -53,3 +53,9 @@ def inverse_matrix(matrix):
         for k in range(n):
           identity[j][k] -= ratio * identity[i][k]
   return identity
+
+# A = [[1, 2],
+#      [3, 4]]
+# B = [[5, 6],
+#      [7, 8]]
+# print(add(A, B))

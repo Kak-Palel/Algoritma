@@ -47,5 +47,5 @@ def determinant_gauss_jordan(M, stage = 0, swap = -1):
 #      [5,  0,  4],
 #      [8,  2, -3]]
 # print("real det: ", -32 + 20 - 24 - 15)
-# A = determinant_gauss_jordan(M)
+# A = determinant_cofactor(M)
 # print(A)

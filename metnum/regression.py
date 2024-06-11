@@ -1,4 +1,5 @@
 import spl_solver as spl
+import differentiation as diff
 import math
 
 def linear(x, y):
@@ -81,7 +82,19 @@ def interpolate_newton(Xset : list, Yset : list, x):
     p = a[n - k] + (x - Xset[n - k])*p
   return p
 
-# x = [0, 1, 2]
-# y = [1, 3, 2]
+def mcLaurin(f : callable, order):
+  a : list = []
+  for i in range(order + 1):
+    a.append(diff.getNthDiff(f, 0, i) / math.factorial(i))
+    print(a[i])
+  return a
+
+
+f = lambda x : x**4 - 2*x**3 - 3*x**2 + 4*x + 5
+print(mcLaurin(f, 4))
+# x = [8, 9, 9.5]
+# y = [2.0794, 2.1972, 2.2513]
+# print(Cx_power_b(x, y))
+# print(interpolate(x, y)) #2.875
 # print(interpolate_newton(x, y, 1.5)) #2.875
 # print(interpolate_lagrange(x, y, 1.5))

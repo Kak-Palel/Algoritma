@@ -1,5 +1,3 @@
-import math
-
 def secant(f, x1, x2, tolerance = 10e-5):
   while abs(x2-x1)>tolerance:
     temp = x2
