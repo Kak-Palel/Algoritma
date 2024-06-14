@@ -89,12 +89,74 @@ def mcLaurin(f : callable, order):
     print(a[i])
   return a
 
+def ode_euler(ft : callable, x0, y0, x, h = 0):
+  if(h == 0):
+    h = (x - x0)/1000
+  x_ = x0
+  y = y0
+  while math.fabs(x_ - x) > math.fabs(h):
+    y = y + h * ft(x_)
+    x_ += h
+  return y
 
-f = lambda x : x**4 - 2*x**3 - 3*x**2 + 4*x + 5
-print(mcLaurin(f, 4))
-# x = [8, 9, 9.5]
-# y = [2.0794, 2.1972, 2.2513]
-# print(Cx_power_b(x, y))
-# print(interpolate(x, y)) #2.875
-# print(interpolate_newton(x, y, 1.5)) #2.875
-# print(interpolate_lagrange(x, y, 1.5))
+def ode_heun(ft : callable, x0, y0, x, h = 0):
+  if(h == 0):
+    h = (x - x0)/1000
+  x_ = x0
+  y = y0
+  while math.fabs(x_ - x) > math.fabs(h):
+    y = y + h * (ft(x_) + ft(x_ + h))/2
+    x_ += h
+  return y
+
+def ode_polygon(ft : callable, x0, y0, x, h = 0):
+  if(h == 0):
+    h = (x - x0)/1000
+  x_ = x0
+  y = y0
+  while math.fabs(x_ - x) > math.fabs(h):
+    y = y + h * ft(x_ + h/2)
+    x_ += h
+  return y
+
+def ode_raltson(ft : callable, x0, y0, x, h = 0):
+  if(h == 0):
+    h = (x - x0)/1000
+  x_ = x0
+  y = y0
+  while math.fabs(x_ - x) > math.fabs(h):
+    y = y + h * (ft(x_) + 2*ft(x_+0.75*h))/3
+    x_ += h
+  return y
+
+def ode_runge_kutta(ft : callable, x0, y0, x, h = 0):
+  if(h == 0):
+    h = (x - x0)/1000
+  x_ = x0
+  y = y0
+  while math.fabs(x_ - x) > math.fabs(h):
+    y = y + h * (ft(x_) + 4*ft(x_+ h/2) + ft(x_ + h))/6
+    x_ += h
+  return y
+
+# f = lambda x: -0.5*x**4 + 4*x**3 - 10*x**2 + 8.5*x + 1
+# ft = lambda x: -2*x**3 + 12*x**2 -20*x + 8.5
+# x0 = 0
+# y0 = f(x0)
+# x = -1
+# n = 400
+# h = (x - x0)/n
+
+# y = f(x)
+# euler = ode_euler(ft, x0, y0, x, h)
+# heun = ode_heun(ft, x0, y0, x, h)
+# polygon = ode_polygon(ft, x0, y0, x, h)
+# raltson = ode_raltson(ft, x0, y0, x, h)
+# runge = ode_runge_kutta(ft, x0, y0, x, h)
+
+
+# print("euler   :" ,euler, "error:", math.fabs(euler - y))
+# print("heun    :" ,heun, "error:", math.fabs(heun - y))
+# print("polygon :" ,polygon, " error:", math.fabs(polygon - y))
+# print("raltson :" ,raltson, " error:", math.fabs(raltson - y))
+# print("runge   :" ,runge, "error:", math.fabs(runge - y))
