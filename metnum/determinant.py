@@ -1,4 +1,13 @@
 def determinant_cofactor(m : list):
+    """
+    Calculates the determinant of a square matrix using the cofactor expansion method.
+
+    Parameters:
+    - m (list): The input matrix.
+
+    Returns:
+    - The determinant of the matrix.
+    """
     if len(m) == 2:
         return m[0][0]*m[1][1] - m[0][1]*m[1][0]
   
@@ -11,7 +20,19 @@ def determinant_cofactor(m : list):
         neg *= -1
     return result
 
+
 def determinant_gauss_jordan(M, stage = 0, swap = -1):
+    """
+    Calculates the determinant of a square matrix using the Gauss-Jordan elimination method.
+
+    Parameters:
+    - M (list): The input matrix.
+    - stage (int): The current stage of the Gauss-Jordan elimination process.
+    - swap (int): The sign of the determinant.
+
+    Returns:
+    - The determinant of the matrix.
+    """
     length = len(M)
 
     if(stage == length):

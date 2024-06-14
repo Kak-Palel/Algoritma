@@ -1,22 +1,62 @@
 def add(A, B):
+  """
+  Adds two matrices element-wise.
+
+  Parameters:
+  - A (list of lists): The first matrix.
+  - B (list of lists): The second matrix.
+
+  Returns:
+  - list of lists: The resulting matrix after addition.
+  """
   for i in range(len(A)):
     for j in range(len(A[0])):
       A[i][j] += B[i][j]
   return A
 
 def substract(A, B):
+  """
+  Subtracts two matrices element-wise.
+
+  Parameters:
+  - A (list of lists): The first matrix.
+  - B (list of lists): The second matrix.
+
+  Returns:
+  - list of lists: The resulting matrix after subtraction.
+  """
   for i in range(len(A)):
     for j in range(len(A[0])):
       A[i][j] -= B[i][j]
   return A
 
 def multiply_constant(A, c):
+  """
+  Multiplies a matrix by a constant.
+
+  Parameters:
+  - A (list of lists): The matrix.
+  - c (float or int): The constant.
+
+  Returns:
+  - list of lists: The resulting matrix after multiplication.
+  """
   for i in range(len(A)):
     for j in range(len(A[0])):
       A[i][j] *= c
   return A
 
 def multiply_matrix(a, b):
+  """
+  Multiplies two matrices.
+
+  Parameters:
+  - a (list of lists): The first matrix.
+  - b (list of lists or float or int): The second matrix or scalar.
+
+  Returns:
+  - list of lists: The resulting matrix after multiplication.
+  """
   if isinstance(b[0], float) or isinstance(b[0], int):
     b = [[i] for i in b]
   elif isinstance(b, float) or isinstance(b, int):
@@ -29,6 +69,15 @@ def multiply_matrix(a, b):
   return result
 
 def inverse_matrix(matrix):
+  """
+  Computes the inverse of a matrix using Gaussian elimination.
+
+  Parameters:
+  - matrix (list of lists): The matrix.
+
+  Returns:
+  - list of lists or None: The inverse matrix if it exists, None otherwise.
+  """
   n = len(matrix)
   identity = [[float(i == j) for i in range(n)] for j in range(n)]
   for i in range(n):
