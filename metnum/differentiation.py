@@ -24,7 +24,21 @@ def centralDifferenceSecond(f : callable, x : float, h : float = 10e-5):
     Returns:
     - float: The approximate value of the second derivative at the given point.
     """
-    return (f(x+2*h) - 2*f(x+h) + 2*f(x-h) - f(x-2*h))/(2 * h**3)
+    return (f(x+h) - 2*f(x) + f(x-h))/(h**2)
+
+def centralDifferenceThird(f : callable, x : float, h : float = 10e-5):
+    """
+    Calculates the third derivative of a function using the central difference method.
+
+    Parameters:
+    - f (callable): The function to differentiate.
+    - x (float): The point at which to evaluate the derivative.
+    - h (float, optional): The step size. Default is 10e-5.
+
+    Returns:
+    - float: The approximate value of the third derivative at the given point.
+    """
+    return (f(x+2*h) - 2*f(x+h) + 2*f(x-h) - f(x-2*h))/(2*h**3)
 
 def forwardDifferenceFirst(f : callable, x : float, h : float = 10e-5):
     """
@@ -131,3 +145,6 @@ def getNthDiff(baseFunc : callable, x : float, n : int = 1, h : float = 10e-5):
     a = getNthDiff(baseFunc, x, n-1, h)
     b = getNthDiff(baseFunc, x+h, n-1, h)
     return (b - a)/h
+
+f = lambda x: x**3
+print(centralDifferenceSecond(f, 1))
