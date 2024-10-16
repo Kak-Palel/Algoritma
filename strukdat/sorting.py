@@ -1,15 +1,11 @@
 import numpy as np
 
-arr = np.array([2,1,4,0,5,6,3])
-
 def bubble(arr):
     while True:
         switch = 0
         for i in range(len(arr)-1):
             if arr[i] > arr[i+1]:
-                temp = arr[i]
-                arr[i] = arr[i+1]
-                arr[i+1] = temp
+                arr[i], arr[i+1] = arr[i+1], arr[i]
                 switch += 1
         if switch == 0:
             return arr
@@ -52,10 +48,38 @@ def merge(arr):
             
         return sorted
 
+def quick(arr):
+    if len(arr) <= 1:
+        return arr
+    
+    pivot = arr[len(arr)-1]
+    
+    i = 0
+    j = len(arr)-2
+
+    while i < j:
+        if arr[i] > pivot:
+            while arr[j] > pivot and j > i:
+                j -= 1
+            if arr[j] < pivot:
+                arr[i] ,arr[j] = arr[j], arr[i]
+        else:
+            i += 1
+    if arr[i] > pivot:
+        arr[i], arr[len(arr)-1] = arr[len(arr)-1], arr[i]
+    
+    left = quick(arr[:i])
+    right = quick(arr[i+1:])
+    
+    return np.concatenate((left, [arr[i]], right))
+
 def heap():
     #TODO: implement heap sort and quick sort
+    # 1 create a heap from array
+    # 2 create a max heap and apply the changes in the heap to the array
+    # 3 swap the first element with the last element and remove the last node in heap
     pass
-    
 
-sorted_arr = merge(arr)
+arr = np.array([2,1,4,0,5,6,3])
+sorted_arr = quick(arr)
 print(sorted_arr)
